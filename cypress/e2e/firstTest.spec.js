@@ -138,34 +138,49 @@ describe('Our First Test', () => {
         //     .click()
         // })
         
-        it.only('assert property2', () => {
-            cy.visit('/')
-            cy.contains('Forms').click()
-            cy.contains('Datepicker').click()
+        // it.only('assert property2', () => {
+        //     cy.visit('/')
+        //     cy.contains('Forms').click()
+        //     cy.contains('Datepicker').click()
 
-            let date = new Date()
-            date.setDate(date.getDate() + 3)
-            let futureDate = date.getDay()
-            let futureMonth = date.toLocaleString('default', {month: 'short'})
+        //     function selectDayFromCurrent(day){
+        //         let date = new Date()
+        //         date.setDate(date.getDate() + day)
+        //         let futureDate = date.getDay()
+        //         let futureMonth = date.toLocaleString('default', {month: 'short'})
+            
+        //         const expectedDate = cy.get('nb-calendar-view-mode').invoke('attr', 'ng-reflect-date').then( date => {
+        //             if(!date.includes(futureMonth)){
+        //                 cy.get('[data-name="chevron-right"]').click()
+        //             }else{ 
+        //                 cy.get('nb-calendar-day-picker').contains(futureDate).click()
 
-            cy.contains('nb-card', 'Common Datepicker')
-            .find('input').then(input => {
-                cy.wrap(input.click())
-                cy.get('nb-calendar-view-mode').invoke('attr', 'ng-reflect-date').then( date => {
-                    if(!date.includes(futureMonth)){
-                        cy.get('[data-name="chevron-right"]').click()
-                    }else{
-                        cy.get('nb-calendar-day-picker').contains(futureDate).click()
-                    }
-                })
-    
-                // cy.get('nb-card-body').contains('div', '2019').click()
-                // cy.contains('May').click()
-                // cy.contains('17').click()
+        //             }
 
-                // cy.wrap(input).invoke('prop', 'value').should('contain','May 17, 2019')
-            })
-        })
+        //             cy.log(cy.wrap(date))
+        //             // return cy.get('nb-calendar-view-mode').invoke('attr', 'ng-reflect-date')
+        //         })
+
+        //         return expectedDate
+        //     }
+
+        //     cy.contains('nb-card', 'Common Datepicker')
+        //     .find('input').then(input => {
+        //         cy.wrap(input.click())
+
+        //         // selectDayFromCurrent(300).then(value => {
+        //         //     console.log(value.text())
+        //         // }) 
+
+        //         cy.wrap(input).invoke('prop', 'value')
+        //         //.should('contain', date)
+        //         // cy.get('nb-card-body').contains('div', '2019').click()
+        //         // cy.contains('May').click()
+        //         // cy.contains('17').click()
+
+        //         // cy.wrap(input).invoke('prop', 'value').should('contain','May 17, 2019')
+        //     })
+        // })
         
         // it.only('assert property 3', () => {
         //     cy.visit('/')
@@ -208,4 +223,25 @@ describe('Our First Test', () => {
         //             .should('be.checked')
         //     })
         // })
+
+    it('lists and dropdowns', () => {
+        cy.visit('/')
+
+        // 1.
+        cy.get('nav nb-select').click()
+        cy.get('.option-list').contains('Dark').click()
+        cy.get('nav nb-select').should('contain', 'Dark')
+        cy.get('nb-layout-header').should('have.css', 'background-color', 'rgb(34, 43, 69)')
+
+        // 2.
+        cy.get('nav').find('nb-select').then( dropdown => {
+            cy.wrap(dropdown).click()
+            cy.get('nb-option').each( listItem => {
+                const itemText = listItem.text().trim()
+                
+                cy.wrap(listItem).click()
+            })
+            
+        })
+    })
 })

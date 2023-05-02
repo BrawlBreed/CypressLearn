@@ -224,24 +224,77 @@ describe('Our First Test', () => {
         //     })
         // })
 
-    it('lists and dropdowns', () => {
-        cy.visit('/')
+    // it('lists and dropdowns', () => {
+    //     cy.visit('/')
 
         // 1.
-        cy.get('nav nb-select').click()
-        cy.get('.option-list').contains('Dark').click()
-        cy.get('nav nb-select').should('contain', 'Dark')
-        cy.get('nb-layout-header').should('have.css', 'background-color', 'rgb(34, 43, 69)')
+        // cy.get('nav nb-select').click()
+        // cy.get('.option-list').contains('Dark').click()
+        // cy.get('nav nb-select').should('contain', 'Dark')
+        // cy.get('nb-layout-header').should('have.css', 'background-color', 'rgb(34, 43, 69)')
 
         // 2.
-        cy.get('nav').find('nb-select').then( dropdown => {
-            cy.wrap(dropdown).click()
-            cy.get('nb-option').each( listItem => {
-                const itemText = listItem.text().trim()
+        // cy.get('nav').find('nb-select').then( dropdown => {
+        //     cy.wrap(dropdown).click()
+        //     cy.get('.option-list').each( (listItem, listIndex) => {
+        //         const itemText = listItem.text().trim().split(' ')[listIndex]
+
+        //         const colors = {
+        //             "Light": 'rgb(255, 255, 255)',
+        //             "Dark": 'rgb(34, 43, 69)',
+        //             "Cosmic": 'rgb(50, 50, 89)',
+        //             "Corporate": 'rgb(255, 255, 255)',
+        //         }
                 
-                cy.wrap(listItem).click()
-            })
+        //         cy.wrap(listItem).contains(itemText).click()
+        //         cy.wrap(dropdown).should('contain', itemText)
+        //         cy.get('nb-layout-header').should('have.css', 'background-color', colors[itemText])
+
+        //         if(listIndex < 3){
+        //             cy.wrap(dropdown).click()
+        //         }
+        //     })
             
+        // })
+    // })
+
+    // 3.
+    it.only('webtables', () => {
+
+        cy.visit('/')
+        cy.contains('Tables & Data').click()
+        cy.contains('Smart Table').click()
+
+        // cy.get('tbody').contains('tr', 'Larry').then(tableRow => {
+        //     cy.wrap(tableRow).find('.nb-edit').click()
+        //     cy.wrap(tableRow).find('[placeholder="Age"]').clear().type('25')
+        //     cy.wrap(tableRow).find('.nb-checkmark').click()
+        //     cy.wrap(tableRow).find('td').eq(6).should('contain', '25')
+        // })
+
+        const tableData = {
+            "ID": '7',
+            "First Name": 'Zlatko',
+            "Last Name": 'Antoniy',
+            "Username": 'zantonius20',
+            "E-mail": 'zantonius20@yahoo.com',
+            "Age": '17'
+        }
+
+        cy.get('thead').find('.nb-plus').click()
+        cy.get('thead').find('tr').eq(2).then( tableRow => {
+            cy.wrap(tableRow).find('[placeholder="ID"]').type(tableData["ID"])
+            cy.wrap(tableRow).find('[placeholder="First Name"]').type(tableData["First Name"])
+            cy.wrap(tableRow).find('[placeholder="Last Name"]').type(tableData["Last Name"])
+            cy.wrap(tableRow).find('[placeholder="Username"]').type(tableData["Username"])
+            cy.wrap(tableRow).find('[placeholder="E-mail"]').type(tableData["E-mail"])
+            cy.wrap(tableRow).find('[placeholder="Age"]').type(tableData["Age"])
+            cy.wrap(tableRow).find('.nb-checkmark').click()
         })
+        for(let i of Object.values(tableData)){ 
+            cy.get('tbody').find('tr').contains('td', i).should('contain', i)
+        }
+
     })
+    
 })

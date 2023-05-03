@@ -12,12 +12,12 @@ function selectGroupMenuItem(groupName){
 export class NavigationPage{
     formLayoutsPage(){
         selectGroupMenuItem('Forms')
-        cy.contains('Smart Table').click({force: true})
+        cy.contains('Form Layouts').click({force: true})
     }
 
     datepickerPage(){
         selectGroupMenuItem('Forms')
-        cy.contains('Datepicker').click()
+        cy.contains('Datepicker').click({force: true})
     }
 
     toasterPage(){
@@ -28,7 +28,6 @@ export class NavigationPage{
     tooltipPage(){
         selectGroupMenuItem('Modal & Overlays')
         cy.contains('Tooltip').click()
-        
     }
 } 
 

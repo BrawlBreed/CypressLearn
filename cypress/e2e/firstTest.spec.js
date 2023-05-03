@@ -259,11 +259,11 @@ describe('Our First Test', () => {
     // })
 
     // 3.
-    it.only('webtables', () => {
+    // it.only('webtables', () => {
 
-        cy.visit('/')
-        cy.contains('Tables & Data').click()
-        cy.contains('Smart Table').click()
+    //     cy.visit('/')
+    //     cy.contains('Tables & Data').click()
+    //     cy.contains('Smart Table').click()
 
         // cy.get('tbody').contains('tr', 'Larry').then(tableRow => {
         //     cy.wrap(tableRow).find('.nb-edit').click()
@@ -272,28 +272,71 @@ describe('Our First Test', () => {
         //     cy.wrap(tableRow).find('td').eq(6).should('contain', '25')
         // })
 
-        const tableData = {
-            "ID": '7',
-            "First Name": 'Zlatko',
-            "Last Name": 'Antoniy',
-            "Username": 'zantonius20',
-            "E-mail": 'zantonius20@yahoo.com',
-            "Age": '17'
-        }
+        // const tableData = {
+        //     "ID": '7',
+        //     "First Name": 'Zlatko',
+        //     "Last Name": 'Antoniy',
+        //     "Username": 'zantonius20',
+        //     "E-mail": 'zantonius20@yahoo.com',
+        //     "Age": '17'
+        // }
 
-        cy.get('thead').find('.nb-plus').click()
-        cy.get('thead').find('tr').eq(2).then( tableRow => {
-            cy.wrap(tableRow).find('[placeholder="ID"]').type(tableData["ID"])
-            cy.wrap(tableRow).find('[placeholder="First Name"]').type(tableData["First Name"])
-            cy.wrap(tableRow).find('[placeholder="Last Name"]').type(tableData["Last Name"])
-            cy.wrap(tableRow).find('[placeholder="Username"]').type(tableData["Username"])
-            cy.wrap(tableRow).find('[placeholder="E-mail"]').type(tableData["E-mail"])
-            cy.wrap(tableRow).find('[placeholder="Age"]').type(tableData["Age"])
-            cy.wrap(tableRow).find('.nb-checkmark').click()
+    //     cy.get('thead').find('.nb-plus').click()
+    //     cy.get('thead').find('tr').eq(2).then( tableRow => {
+    //         cy.wrap(tableRow).find('[placeholder="ID"]').type(tableData["ID"])
+    //         cy.wrap(tableRow).find('[placeholder="First Name"]').type(tableData["First Name"])
+    //         cy.wrap(tableRow).find('[placeholder="Last Name"]').type(tableData["Last Name"])
+    //         cy.wrap(tableRow).find('[placeholder="Username"]').type(tableData["Username"])
+    //         cy.wrap(tableRow).find('[placeholder="E-mail"]').type(tableData["E-mail"])
+    //         cy.wrap(tableRow).find('[placeholder="Age"]').type(tableData["Age"])
+    //         cy.wrap(tableRow).find('.nb-checkmark').click()
+    //     })
+    //     for(let i of Object.values(tableData)){ 
+    //         cy.get('tbody').find('tr').contains('td', i).should('contain', i)
+    //     }
+
+    // })
+
+    it('tooltips', () => {
+        cy.visit('/')
+        cy.contains('Modal & Overlays').click()
+        cy.contains('Tooltip').click()
+
+        cy.contains('nb-card', 'Colored Tooltips')
+        .contains('Default').click()
+        cy.get('nb-tooltip').should('contain', 'This is a tooltip')
+
+    })
+
+    it.only('dialog box', () => {
+        cy.visit('/')
+        cy.contains('Tables & Data').click()
+        cy.contains('Smart Table').click()
+
+        // 1
+        // cy.get('table').find('tbody').find('tr').eq(2)
+        // .find('i[class="nb-trash"]').click()
+        // cy.on('window:confirm', (confirm) => {
+        //     expect(confirm).to.equal('Are you sure you want to delete?')
+        // })
+
+        // // 2
+        // const stub = cy.stub()
+        // cy.on('window.confirm', stub)
+        // cy.get('tbody tr').eq(1).find('.nb-trash').click().then(() => {
+        //     expect(stub.getCall(0)).to.be.calledWith('Are you sure you want to delete?')
+        // })
+
+        // Using Chai Assertions
+
+        // Example 1
+        cy.get('thead').find('input').eq(2)
+        .should('have.class', 'form-control')
+
+        // Example 2
+        cy.get('thead').find('a').eq(4).invoke('text').then(element => {
+            cy.wrap(element.trim()).should('contain', 'E-mail')
         })
-        for(let i of Object.values(tableData)){ 
-            cy.get('tbody').find('tr').contains('td', i).should('contain', i)
-        }
 
     })
     

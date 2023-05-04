@@ -35,3 +35,8 @@
 //     }
 //   }
 // }
+
+// Custom Commands added to the workflow!
+Cypress.Commands.add('openHomePage', () => {
+    cy.visit('/')
+})

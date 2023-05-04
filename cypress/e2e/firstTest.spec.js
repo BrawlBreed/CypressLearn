@@ -265,21 +265,21 @@ describe('Our First Test', () => {
     //     cy.contains('Tables & Data').click()
     //     cy.contains('Smart Table').click()
 
-        // cy.get('tbody').contains('tr', 'Larry').then(tableRow => {
-        //     cy.wrap(tableRow).find('.nb-edit').click()
-        //     cy.wrap(tableRow).find('[placeholder="Age"]').clear().type('25')
-        //     cy.wrap(tableRow).find('.nb-checkmark').click()
-        //     cy.wrap(tableRow).find('td').eq(6).should('contain', '25')
-        // })
+    //     cy.get('tbody').contains('tr', 'Larry').then(tableRow => {
+    //         cy.wrap(tableRow).find('.nb-edit').click()
+    //         cy.wrap(tableRow).find('[placeholder="Age"]').clear().type('25')
+    //         cy.wrap(tableRow).find('.nb-checkmark').click()
+    //         cy.wrap(tableRow).find('td').eq(6).should('contain', '25')
+    //     })
 
-        // const tableData = {
-        //     "ID": '7',
-        //     "First Name": 'Zlatko',
-        //     "Last Name": 'Antoniy',
-        //     "Username": 'zantonius20',
-        //     "E-mail": 'zantonius20@yahoo.com',
-        //     "Age": '17'
-        // }
+    //     const tableData = {
+    //         "ID": '7',
+    //         "First Name": 'Zlatko',
+    //         "Last Name": 'Antoniy',
+    //         "Username": 'zantonius20',
+    //         "E-mail": 'zantonius20@yahoo.com',
+    //         "Age": '17'
+    //     }
 
     //     cy.get('thead').find('.nb-plus').click()
     //     cy.get('thead').find('tr').eq(2).then( tableRow => {
